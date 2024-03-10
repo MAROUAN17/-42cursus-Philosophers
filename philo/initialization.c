@@ -79,7 +79,7 @@ void    initialize_philos(char **args, t_philo *philos, pthread_mutex_t *forks,
             philos[i].num_times_to_eat = -1;
         philos[i].dead = &program->dead_flag;
         philos[i].r_fork = &forks[i];
-        philos[i].l_fork = &forks[(i + 1) % 4];
+        philos[i].l_fork = &forks[(i + 1) % nbr_philos];
         philos[i].write_lock = &write_lock;
         philos[i].dead_lock = &dead_lock;
         philos[i].meal_lock = &meal_lock;

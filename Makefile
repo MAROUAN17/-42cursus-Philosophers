@@ -15,7 +15,7 @@ ${LIBFT}:
 	${CC} ${CFLAGS} -c $< -o $@
 
 philo/philo: ${OBJS} ${LIBFT}
-	${CC} ${CFLAGS} ${OBJS} ${LIBFT} -o philo/philo
+	${CC} ${CFLAGS} ${OBJS} ${LIBFT} -fsanitize=address -o philo/philo
 
 clean:
 	rm -f ${OBJS}

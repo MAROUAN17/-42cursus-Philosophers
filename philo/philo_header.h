@@ -39,7 +39,7 @@ typedef struct s_program
 }					t_program;
 
 int     ft_atoi(const char *str);
-void    ft_parsing(int number_args, char **args);
+int		ft_parsing(int number_args, char **args);
 void    initialize_program(t_program *program, t_philo *philos);
 void	initialize_philos(char **args, t_philo *philos,
 	pthread_mutex_t *forks, t_program *program);
@@ -50,7 +50,7 @@ size_t	get_current_time(void);
 void	*monitor(void *program);
 void	destroying_mutexes(t_program *program);
 void	check_philo_dead(t_philo *philos);
-void	check_total_eaten_meals(t_program *program);
+int		check_total_eaten_meals(t_program *program);
 void    create_thread_and_join(t_philo *philos, int nbr_philos);
 void	creating_monitoring_thread(t_program *program);
 void	detach_threads(t_philo *philos);

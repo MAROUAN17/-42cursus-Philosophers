@@ -2,9 +2,10 @@
 
 void	check_philo_dead(t_philo *philos)
 {
-	static int	i;
+	int	i;
 
-	if (i < philos[i].num_of_philos)
+	i = 0;
+	while (i < philos[0].num_of_philos)
 	{
 		if (get_current_time() - philos[i].last_meal > philos[i].time_to_die && philos[i].last_meal != 0 && philos[i].eating == 0)
 		{
@@ -20,18 +21,14 @@ void	check_philo_dead(t_philo *philos)
 		}
 		i++;
 	}
-	if (i == philos[i - 1].num_of_philos)
-		i = 0;
 }
 
-void check_total_eaten_meals(t_program *program)
+int	check_total_eaten_meals(t_program *program)
 {
 	t_program 	*c_program;
 	static int	i;
 	static int	nbr_philos;
 
-	i = 0;
-	nbr_philos = 0;
 	c_program = (t_program *)program;
 	if (i < c_program->philos[i].num_of_philos)
 	{
@@ -39,16 +36,17 @@ void check_total_eaten_meals(t_program *program)
 			nbr_philos++;
 		i++;
 	}
-	if (nbr_philos == c_program->philos[i - 1].num_of_philos)
+	if (nbr_philos == c_program->philos[0].num_of_philos)
 	{
-        pthread_mutex_lock(c_program->philos[i - 1].dead_lock);
-        *(c_program->philos[i - 1].dead) = 1;
-        pthread_mutex_unlock(c_program->philos[i - 1].dead_lock);
-        pthread_mutex_lock(c_program->philos[i - 1].write_lock);
+        pthread_mutex_lock(c_program->philos[0].dead_lock);
+        *(c_program->philos[0].dead) = 1;
+        pthread_mutex_unlock(c_program->philos[0].dead_lock);
+        pthread_mutex_lock(c_program->philos[0].write_lock);
 		printf("all the philosophers have eaten the number of times they should eat!!\n");
-        pthread_mutex_unlock(c_program->philos[i - 1].write_lock);
-		exit(1);
+        pthread_mutex_unlock(c_program->philos[0].write_lock);
+		return (1);
 	}
-	if (i == c_program->philos[i - 1].num_of_philos)
+	if (i == c_program->philos[0].num_of_philos)
 		i = 0;
+	return (0);
 }

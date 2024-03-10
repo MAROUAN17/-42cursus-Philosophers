@@ -2,19 +2,21 @@
 
 void	*monitor(void *program)
 {
+	int check;
 	t_program	*c_program;
 
+	check = 0;
 	c_program = (t_program *)program;
 	while (1)
 	{
 		if (c_program->philos->num_times_to_eat != -1)
-			check_total_eaten_meals(c_program);
+			check = check_total_eaten_meals(c_program);
 		check_philo_dead(c_program->philos);
-		if (c_program->dead_flag == 1)
+		if (c_program->dead_flag == 1 || check == 1)
 		{
 			destroying_mutexes(c_program);
 			detach_threads(c_program->philos);
-			exit(1);
+			return (NULL);
 		}
 	}
 	return (NULL);
@@ -31,13 +33,36 @@ void	*sleeping_state(t_philo *philo)
 
 void	*eating_state(t_philo *philo)
 {
-	pthread_mutex_lock(philo->r_fork);
-	pthread_mutex_lock(philo->l_fork);
-	pthread_mutex_lock(philo->meal_lock);
+	if (philo->id == philo->num_of_philos)
+	{
+		pthread_mutex_lock(philo->l_fork);
+		pthread_mutex_lock(philo->write_lock);
+		printf("%zu %d has taken a fork\n", get_current_time(), philo->id);
+		pthread_mutex_unlock(philo->write_lock);
+		pthread_mutex_lock(philo->r_fork);
+		pthread_mutex_lock(philo->write_lock);
+		printf("%zu %d has taken a fork\n", get_current_time(), philo->id);
+		pthread_mutex_unlock(philo->write_lock);
+	}
+	else
+	{
+		pthread_mutex_lock(philo->r_fork);
+		pthread_mutex_lock(philo->write_lock);
+		printf("%zu %d has taken a fork\n", get_current_time(), philo->id);
+		pthread_mutex_unlock(philo->write_lock);
+		pthread_mutex_lock(philo->l_fork);
+		pthread_mutex_lock(philo->write_lock);
+		printf("%zu %d has taken a fork\n", get_current_time(), philo->id);
+		pthread_mutex_unlock(philo->write_lock);
+	}
+	// pthread_mutex_lock(philo->write_lock);
+	// printf("%zu %d has taken a fork\n", get_current_time(), philo->id);
+	// printf("%zu %d is eating\n", get_current_time(), philo->id);
+	// pthread_mutex_unlock(philo->write_lock);
 	pthread_mutex_lock(philo->write_lock);
-	printf("%zu %d has taken a fork\n", get_current_time(), philo->id);
 	printf("%zu %d is eating\n", get_current_time(), philo->id);
 	pthread_mutex_unlock(philo->write_lock);
+	pthread_mutex_lock(philo->meal_lock);
 	philo->eating = 1;
 	ft_sleep(philo->time_to_eat);
 	philo->meals_eaten++;
@@ -77,7 +102,8 @@ int main(int ac, char **av)
 	if (ac == 5 || ac == 6)
 	{
 		i = 0;
-		ft_parsing(ac, av);
+		if (ft_parsing(ac, av))
+			return (0);
 		nbr_philos = ft_atoi(av[1]);
 		if (ac == 6)
 			nbr_times_to_eat = ft_atoi(av[5]);
@@ -90,7 +116,7 @@ int main(int ac, char **av)
 	else
 	{
 		printf("Invalid arguments!!\n"); 
-		exit(1);
+		return (0);
 	}
 	return (0);
 }

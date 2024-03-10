@@ -10,9 +10,9 @@ void    destroying_mutexes(t_program *program)
         pthread_mutex_destroy(program->philos[i].r_fork);
         i++;
     }
-    pthread_mutex_destroy(program->philos[i - 1].write_lock);
-    pthread_mutex_destroy(program->philos[i - 1].meal_lock);
-    pthread_mutex_destroy(program->philos[i - 1].dead_lock);
+    pthread_mutex_destroy(program->philos[0].write_lock);
+    pthread_mutex_destroy(program->philos[0].meal_lock);
+    pthread_mutex_destroy(program->philos[0].dead_lock);
 }
 
 void    detach_threads(t_philo *philos)
