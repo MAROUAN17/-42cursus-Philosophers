@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sleep.c                                         :+:      :+:    :+:   */
+/*   ft_sleep_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maglagal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/23 11:04:33 by maglagal          #+#    #+#             */
-/*   Updated: 2024/03/23 11:04:34 by maglagal         ###   ########.fr       */
+/*   Created: 2024/03/23 11:30:28 by maglagal          #+#    #+#             */
+/*   Updated: 2024/03/23 13:11:34 by maglagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_header.h"
+#include "philo_header_bonus.h"
 
 size_t	ft_sleep(size_t milliseconds)
 {
@@ -29,7 +29,7 @@ size_t	get_current_time(void)
 	if (gettimeofday(&current_time, NULL) == -1)
 	{
 		write(1, "Error getting current time\n", 30);
-		return (0);
+		exit(1);
 	}
 	return (current_time.tv_sec * 1000 + current_time.tv_usec / 1000);
 }

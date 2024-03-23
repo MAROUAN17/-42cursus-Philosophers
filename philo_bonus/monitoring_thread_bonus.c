@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sleep.c                                         :+:      :+:    :+:   */
+/*   monitoring_thread_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maglagal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/23 11:04:33 by maglagal          #+#    #+#             */
-/*   Updated: 2024/03/23 11:04:34 by maglagal         ###   ########.fr       */
+/*   Created: 2024/03/23 11:50:21 by maglagal          #+#    #+#             */
+/*   Updated: 2024/03/23 15:25:53 by maglagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_header.h"
+#include "philo_header_bonus.h"
 
-size_t	ft_sleep(size_t milliseconds)
+void	creating_monitor_thread(t_philo *philo)
 {
-	size_t	start;
+	pthread_t	thread_monitor;
 
-	start = get_current_time();
-	while (get_current_time() - start < milliseconds)
-		usleep(100);
-	return (0);
+	pthread_create(&thread_monitor, NULL, monitoring, philo);
+	pthread_detach(thread_monitor);
 }
 
-size_t	get_current_time(void)
+void	*monitoring(void *philo)
 {
-	struct timeval	current_time;
+	t_philo		*c_philo;
 
-	if (gettimeofday(&current_time, NULL) == -1)
+	c_philo = (t_philo *)philo;
+	while (1)
 	{
-		write(1, "Error getting current time\n", 30);
-		return (0);
+		if (c_philo->num_times_to_eat != -1)
+			check_total_eaten_meals(c_philo);
+		check_philo_dead(c_philo);
 	}
-	return (current_time.tv_sec * 1000 + current_time.tv_usec / 1000);
+	return (NULL);
 }

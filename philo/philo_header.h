@@ -1,18 +1,29 @@
-#ifndef PHILO_HEADER
-# define PHILO_HEADER
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_header.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maglagal <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/23 11:28:47 by maglagal          #+#    #+#             */
+/*   Updated: 2024/03/23 11:28:48 by maglagal         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <string.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <pthread.h>
-#include <sys/time.h>
+#ifndef PHILO_HEADER_H
+# define PHILO_HEADER_H
+
+# include <string.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <pthread.h>
+# include <sys/time.h>
 
 typedef struct s_philo
 {
 	pthread_t		thread;
 	int				id;
-	int				eating;
 	int				meals_eaten;
 	size_t			last_meal;
 	size_t			time_to_die;
@@ -38,24 +49,30 @@ typedef struct s_program
 	t_philo			*philos;
 }					t_program;
 
-int     ft_atoi(const char *str);
+int		ft_atoi(const char *str);
 int		ft_parsing(int number_args, char **args);
-void    initialize_program(t_program *program, t_philo *philos);
+void	initialize_program(t_program *program, t_philo *philos);
 void	initialize_philos(char **args, t_philo *philos,
-	pthread_mutex_t *forks, t_program *program);
+			pthread_mutex_t *forks, t_program *program);
 void	initialize_forks(pthread_mutex_t *forks, int nbr_philos);
 void	*philosophers_life_cycle(void *actual_philo);
-size_t  ft_sleep(size_t milliseconds);
+size_t	ft_sleep(size_t milliseconds);
 size_t	get_current_time(void);
 void	*monitor(void *program);
 void	destroying_mutexes(t_program *program);
 void	check_philo_dead(t_philo *philos);
 int		check_total_eaten_meals(t_program *program);
-void    create_thread_and_join(t_philo *philos, int nbr_philos);
+void	create_thread_and_join(t_philo *philos, int nbr_philos);
 void	creating_monitoring_thread(t_program *program);
-void	detach_threads(t_philo *philos);
-
+void	printing_fork_message(t_philo *philo);
+void	locking_right_fork(t_philo *philo);
+void	locking_left_fork(t_philo *philo);
+void	unlocking_forks(t_philo *philo);
+void	unlocking_all_mutexes(t_philo *philo);
+void	locking_forks(t_philo *philo);
+int		check_time_philo_sleep(void *time_to_sleep_char);
+int		check_number_of_meals(char *number_of_meals_char);
+int		check_total_number_of_eating(char *total_eating_char);
+int		check_number(char *arg);
 
 #endif
-
-
