@@ -1,5 +1,5 @@
-<h1 className="font-lg">**PHILOSOPHERS**</h1>
-<p>
+<h1 className="font-lg">PHILOSOPHERS</h1>
+<p className="font-bold">
 The philosophers project in the 42 cursus, often referred to as the "Dining Philosophers" problem, is a classic concurrency and synchronization exercise. The project is inspired by a thought experiment where a group of philosophers sits around a dining table with a bowl of spaghetti and a fork placed between each pair of adjacent philosophers. The philosophers alternate between two activities: eating and thinking. To eat, a philosopher must acquire both forks adjacent to them. However, the catch is that only one philosopher can hold a fork at a time, and a philosopher can only eat if they have both forks.
 
 The main objective of the project is to implement a solution that prevents deadlocks, starvation, and ensures that philosophers can dine harmoniously without causing issues like resource contention. Students typically implement this project using a multithreaded or multiprocess approach, where each philosopher is represented by a thread or process. Synchronization mechanisms such as semaphores, mutexes, or monitors are used to coordinate access to shared resources (e.g., forks) and avoid conflicts between philosophers.
