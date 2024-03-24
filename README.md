@@ -1,4 +1,4 @@
-<h1 className="font-lg">PHILOSOPHERS</h1>
+<h1 className="font-lg text-center">PHILOSOPHERS</h1>
 <p className="font-bold">
 The philosophers project in the 42 cursus, often referred to as the "Dining Philosophers" problem, is a classic concurrency and synchronization exercise. The project is inspired by a thought experiment where a group of philosophers sits around a dining table with a bowl of spaghetti and a fork placed between each pair of adjacent philosophers. The philosophers alternate between two activities: eating and thinking. To eat, a philosopher must acquire both forks adjacent to them. However, the catch is that only one philosopher can hold a fork at a time, and a philosopher can only eat if they have both forks.
 
