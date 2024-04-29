@@ -6,7 +6,7 @@
 /*   By: maglagal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 11:32:03 by maglagal          #+#    #+#             */
-/*   Updated: 2024/04/29 10:43:58 by maglagal         ###   ########.fr       */
+/*   Updated: 2024/04/29 12:34:44 by maglagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	check_quit_child_processes(t_philo *philos, int n_philos)
 {
 	int	j;
 	int	res;
-	int status;
+	int	status;
 
 	j = 0;
 	status = 0;
@@ -91,10 +91,10 @@ int	creating_philos(t_philo *philos)
 	starttime = get_current_time();
 	while (i < philos[0].num_of_philos)
 	{
+		philos[i].start_time = starttime;
 		philos[i].p_pid = fork();
 		if (philos[i].p_pid == -1)
 			return (handle_fork_fail(philos, i));
-		philos[i].start_time = starttime;
 		philos[i].id = i + 1;
 		if (philos[i].p_pid == 0)
 		{

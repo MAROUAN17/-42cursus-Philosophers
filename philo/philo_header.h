@@ -6,7 +6,7 @@
 /*   By: maglagal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 11:28:47 by maglagal          #+#    #+#             */
-/*   Updated: 2024/04/27 18:05:22 by maglagal         ###   ########.fr       */
+/*   Updated: 2024/04/29 11:53:25 by maglagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typedef struct s_philo
 	pthread_mutex_t	*dead_lock;
 	pthread_mutex_t	*meal_lock;
 	pthread_mutex_t	*creation_lock;
-	pthread_mutex_t	*dead_var;
 }					t_philo;
 
 typedef struct s_program
@@ -49,7 +48,6 @@ typedef struct s_program
 	pthread_mutex_t	meal_lock;
 	pthread_mutex_t	write_lock;
 	pthread_mutex_t	creation_lock;
-	pthread_mutex_t	dead_var;
 	t_philo			*philos;
 }					t_program;
 

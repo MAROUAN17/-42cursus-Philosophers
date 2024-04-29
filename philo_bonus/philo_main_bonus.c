@@ -6,7 +6,7 @@
 /*   By: maglagal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 11:50:52 by maglagal          #+#    #+#             */
-/*   Updated: 2024/04/29 11:10:14 by maglagal         ###   ########.fr       */
+/*   Updated: 2024/04/29 12:28:36 by maglagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,13 @@ void	eating_state(t_philo *philo)
 	printf("%zu %d is eating\n", get_current_time() - philo->start_time,
 		philo->id);
 	sem_post(philo->b_sema);
+	ft_sleep(philo->time_to_eat);
 	sem_wait(philo->b_sema);
 	check_death_variable(philo);
 	philo->last_meal = get_current_time();
 	philo->meals_eaten++;
 	sem_post(philo->b_sema);
-	ft_sleep(philo->time_to_eat);
-	sem_wait(philo->b_sema);
 	check_death_variable(philo);
-	sem_post(philo->b_sema);
 	sem_post(philo->sema);
 	sem_post(philo->sema);
 }

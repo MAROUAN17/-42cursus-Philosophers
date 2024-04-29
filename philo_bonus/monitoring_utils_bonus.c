@@ -6,7 +6,7 @@
 /*   By: maglagal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 11:32:20 by maglagal          #+#    #+#             */
-/*   Updated: 2024/04/27 17:25:19 by maglagal         ###   ########.fr       */
+/*   Updated: 2024/04/29 12:33:28 by maglagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	check_total_eaten_meals(t_philo *philo)
 	sem_wait(philo->b_sema);
 	if (philo->meals_eaten == philo->num_times_to_eat)
 	{
+		sem_post(philo->b_sema);
 		sem_post(philo->b_sema);
 		safe_sem_close(philo->b_sema);
 		sem_post(philo->sema);

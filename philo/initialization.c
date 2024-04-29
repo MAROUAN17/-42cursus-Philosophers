@@ -6,7 +6,7 @@
 /*   By: maglagal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 11:08:54 by maglagal          #+#    #+#             */
-/*   Updated: 2024/04/27 18:23:22 by maglagal         ###   ########.fr       */
+/*   Updated: 2024/04/29 11:53:39 by maglagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	create_thread_and_join(t_philo *philos, int nbr_philos)
 		if (pthread_create(&philos[i].thread, NULL, philosophers_life_cycle,
 				&philos[i]) != 0)
 		{
-			write(2, "pthread_join() failed!!\n", 25);
+			write(2, "pthread_create() failed!!\n", 25);
 			return (1);
 		}
 		i++;
