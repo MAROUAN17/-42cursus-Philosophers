@@ -6,7 +6,7 @@
 /*   By: maglagal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 11:50:21 by maglagal          #+#    #+#             */
-/*   Updated: 2024/04/29 11:46:47 by maglagal         ###   ########.fr       */
+/*   Updated: 2024/05/02 13:57:26 by maglagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,16 @@ void	*monitoring(void *philo)
 		check_philo_dead(c_philo);
 	}
 	return (NULL);
+}
+
+void check_death_child_process(t_philo *philos, pid_t pid)
+{
+	int	i;
+
+	i = 0;
+	while (philos[i].p_pid != pid)
+		i++;
+	printf("%zu %d died\n", get_current_time() - philos[i].start_time,
+		philos[i].id);
+	kill_child_processes(philos, philos[0].num_of_philos);
 }

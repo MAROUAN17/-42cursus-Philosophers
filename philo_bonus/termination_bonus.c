@@ -6,7 +6,7 @@
 /*   By: maglagal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 11:52:30 by maglagal          #+#    #+#             */
-/*   Updated: 2024/04/29 11:52:14 by maglagal         ###   ########.fr       */
+/*   Updated: 2024/05/02 14:00:03 by maglagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,20 +60,12 @@ void	kill_child_processes(t_philo *philos, int total_philos)
 
 void	waiting_for_child_processes(t_philo *philos)
 {
-	int	status;
-	int	i;
+	int		status;
+	// int		i;
+	// pid_t	pid;
 
 	status = 0;
-	i = 0;
-	while (i < philos[0].num_of_philos - 1)
-	{
-		if (waitpid(-1, &status, 0) == -1)
-		{
-			kill_child_processes(philos, philos[0].num_of_philos);
-			return ;
-		}
-		i++;
-	}
+	kill_child_processes(philos, philos[0].num_of_philos);
 }
 
 void	terminate_processes(t_philo *philos)
@@ -91,15 +83,9 @@ void	terminate_processes(t_philo *philos)
 		return ;
 	}
 	if (WEXITSTATUS(status) == 1)
-	{
-		while (philos[i].p_pid != pid)
-			i++;
-		printf("%zu %d died\n", get_current_time() - philos[i].start_time,
-			philos[i].id);
-		kill_child_processes(philos, philos[0].num_of_philos);
-	}
+		check_death_child_process(philos, pid);
 	if (WEXITSTATUS(status) == 2)
-		waiting_for_child_processes(philos);
+		kill_child_processes(philos, philos[0].num_of_philos);
 	if (WEXITSTATUS(status) == 3)
 		kill_child_processes(philos, philos[0].num_of_philos);
 }

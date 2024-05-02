@@ -6,7 +6,7 @@
 /*   By: maglagal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 11:36:19 by maglagal          #+#    #+#             */
-/*   Updated: 2024/04/29 11:53:18 by maglagal         ###   ########.fr       */
+/*   Updated: 2024/05/02 13:46:39 by maglagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ sem_t	*safe_sem_open(char *sema_name, int ini_value);
 int		safe_waitpid(pid_t pid, int *r_status);
 int		handle_fork_fail(t_philo *philos, int nbr);
 int		create_semaphores(sem_t **sema, sem_t **b_sema, int nbr_philos);
+void	check_death_child_process(t_philo *philos, pid_t pid);
 
 #endif
