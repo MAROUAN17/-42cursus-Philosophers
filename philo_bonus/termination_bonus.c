@@ -6,7 +6,7 @@
 /*   By: maglagal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 11:52:30 by maglagal          #+#    #+#             */
-/*   Updated: 2024/05/02 14:00:03 by maglagal         ###   ########.fr       */
+/*   Updated: 2024/05/02 14:20:02 by maglagal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,6 @@ void	kill_child_processes(t_philo *philos, int total_philos)
 		terminate_semaphore(philos[0].sema, philos[0].b_sema);
 		exit(1);
 	}
-}
-
-void	waiting_for_child_processes(t_philo *philos)
-{
-	int		status;
-	// int		i;
-	// pid_t	pid;
-
-	status = 0;
-	kill_child_processes(philos, philos[0].num_of_philos);
 }
 
 void	terminate_processes(t_philo *philos)
